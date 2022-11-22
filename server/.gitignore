@@ -102,6 +102,7 @@ dist
 
 # TernJS port file
 .tern-port
+Footer
 
 # misc
 .DS_Store
@@ -109,3 +110,4 @@ dist
 .env.development.local
 .env.test.local
 .env.production.local
+
