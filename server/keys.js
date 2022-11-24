@@ -1,4 +1,4 @@
 module.exports={
-    MONGOURI:"put your mongo cluster URI here",
-    JWT_SECRET: "put some string pattern here"
+    MONGOURI:"mongodb+srv://Abhibadger:ae1GJ7N5VjrDlGYT@cluster0.btoxn6o.mongodb.net/?retryWrites=true&w=majority",
+    JWT_SECRET: "shdhsaasdsaddppwpqeuwquhasfmnzcvdsu"
 }
