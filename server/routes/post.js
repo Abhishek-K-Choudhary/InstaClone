@@ -5,7 +5,7 @@ const Post = mongoose.model("Post")
 const requireLogin = require('../middleware/reqireLogin')
  
 
-router.get('/allpost', (req, res)=>{
+router.get('/allpost', requireLogin, (req, res)=>{
     Post.find()
     .populate("postedBy", "_id name")
     .then(posts => {
