@@ -33,6 +33,8 @@ const Signup = ()=>{
                 M.toast({html: data.massage,classes:'#2e7d32 green darken-3'})
                 navigate('/login');
             }
+        }).catch(err=>{
+            console.log(err)
         })
     } 
 
@@ -45,22 +47,22 @@ const Signup = ()=>{
             placeholder='Name'
             value={name}
             onChange={(e)=>setName(e.target.value)}
-            >
-            </input>
+            />
+            
             <input 
             type="text"
             placeholder='Email'
             value={email}
             onChange={(e)=>setEmail(e.target.value)}
-            >
-            </input>
+            />
+        
             <input 
             type="text"
             placeholder='Password'
             value={password}
             onChange={(e)=>setPassword(e.target.value)}
-            >
-            </input>
+            />
+            
             <button className="btn waves-effect waves-light #42a5f5 blue lighten-1"
             onClick={()=>PostData()}>
                 SignUp
