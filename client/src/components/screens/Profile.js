@@ -1,6 +1,19 @@
-import React from 'react';
+import React,{useState,useEffect,useContext} from 'react';
+import { UserContext } from '../../App';
 
 const Profile = ()=>{
+    const [mypics, setPics] = useState([])
+    const {state, dispatch} = useContext(UserContext)
+    useEffect(()=>{
+        fetch('/mypost',{
+            headers:{
+                "authorization":"Bearer "+localStorage.getItem("jwt")
+            }
+        }).then(res=>res.json())
+        .then(result=>{
+            setPics(result.mypost)
+        })
+    },[])
     return (
         <div style={{maxWidth:800, margin:"0px auto"}}>
             <div style={{
@@ -12,7 +25,7 @@ const Profile = ()=>{
                 <img style={{width:"160px", height:"160px", borderRadius:"80px"}} src="https://media.istockphoto.com/id/1371301907/photo/friendly-young-man-wearing-denim-shirt.jpg?b=1&s=170667a&w=0&k=20&c=uvclBOQrU3gd4_FMwzmTNK1PY4ydO_SlEgELJYj5mVI=" />
                 </div>
                 <div>
-                    <h4>Chober Choudhary</h4>
+                    <h4>{state?state.name:"loading"}</h4>
                     <div style={{
                         display:"flex",
                         justifyContent:"space-between",
@@ -25,12 +38,13 @@ const Profile = ()=>{
                 </div>
             </div>
             <div className='gallery'>
-                <img className='item' src="https://media.istockphoto.com/id/1371301907/photo/friendly-young-man-wearing-denim-shirt.jpg?b=1&s=170667a&w=0&k=20&c=uvclBOQrU3gd4_FMwzmTNK1PY4ydO_SlEgELJYj5mVI="/>
-                <img className='item' src="https://media.istockphoto.com/id/1371301907/photo/friendly-young-man-wearing-denim-shirt.jpg?b=1&s=170667a&w=0&k=20&c=uvclBOQrU3gd4_FMwzmTNK1PY4ydO_SlEgELJYj5mVI="/>
-                <img className='item' src="https://media.istockphoto.com/id/1371301907/photo/friendly-young-man-wearing-denim-shirt.jpg?b=1&s=170667a&w=0&k=20&c=uvclBOQrU3gd4_FMwzmTNK1PY4ydO_SlEgELJYj5mVI="/>
-                <img className='item' src="https://media.istockphoto.com/id/1371301907/photo/friendly-young-man-wearing-denim-shirt.jpg?b=1&s=170667a&w=0&k=20&c=uvclBOQrU3gd4_FMwzmTNK1PY4ydO_SlEgELJYj5mVI="/>
-                <img className='item' src="https://media.istockphoto.com/id/1371301907/photo/friendly-young-man-wearing-denim-shirt.jpg?b=1&s=170667a&w=0&k=20&c=uvclBOQrU3gd4_FMwzmTNK1PY4ydO_SlEgELJYj5mVI="/>
-                <img className='item' src="https://media.istockphoto.com/id/1371301907/photo/friendly-young-man-wearing-denim-shirt.jpg?b=1&s=170667a&w=0&k=20&c=uvclBOQrU3gd4_FMwzmTNK1PY4ydO_SlEgELJYj5mVI="/>
+                {
+                    mypics.map(item=>{
+                        return (
+                            <img key={item._id} className='item' src={item.photo} alt={item.title}/>
+                        )
+                    })
+                }
             </div>
         </div>
     )

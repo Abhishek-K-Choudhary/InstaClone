@@ -21,7 +21,10 @@ a{
   border-bottom: 1px solid rgb(10, 194, 240) !important;
   box-shadow: 0 1px 0 0 rgb(7, 163, 207) !important;
 }
-
+.input-field input[type=password]:focus {
+  border-bottom: 1px solid rgb(10, 194, 240) !important;
+  box-shadow: 0 1px 0 0 rgb(7, 163, 207) !important;
+}
 .gallery{
   display: flex;
   flex-wrap: wrap;
