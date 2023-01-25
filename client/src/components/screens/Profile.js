@@ -4,6 +4,7 @@ import { UserContext } from '../../App';
 const Profile = ()=>{
     const [mypics, setPics] = useState([])
     const {state, dispatch} = useContext(UserContext)
+    console.log(state)
     useEffect(()=>{
         fetch('/mypost',{
             headers:{
@@ -14,6 +15,7 @@ const Profile = ()=>{
             setPics(result.mypost)
         })
     },[])
+
     return (
         <div style={{maxWidth:800, margin:"0px auto"}}>
             <div style={{
