@@ -1,8 +1,8 @@
-const express = require('express');
-const app = express();
-const mongoose = require("mongoose");
-const { MONGOURI } = require('./keys');
-const PORT = 5000;
+const express = require('express')
+const app = express()
+const mongoose  = require('mongoose')
+const {MONGOURI} = require('./config/keys')
+const PORT = 5000
 
 
 
