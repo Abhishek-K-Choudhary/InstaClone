@@ -8,22 +8,22 @@ const Profile = ()=>{
     const {userid} = useParams
     const [showfollow,setShowFollow] = useState(state?!state.following.includes(userid):true)
     useEffect(()=>{
-        fetch(`/user/:id${userid}`,{
+        fetch(`/user/${userid}`,{
             headers:{
                 "authorization":"Bearer "+localStorage.getItem("jwt")
             }
         }).then(res=>res.json())
         .then(result=>{
+            console.log(result)
             setProfile(result)
         })
     },[])
-    
     const followUser = ()=>{
         fetch('/follow',{
             method:"put",
             headers:{
                 "Content-Type":"application/json",
-                "authorization":"Bearer "+localStorage.getItem('jwt')
+                "Authorization":"Bearer "+localStorage.getItem('jwt')
             },
             body:JSON.stringify({
                 followId:userid
@@ -50,7 +50,7 @@ const Profile = ()=>{
             method:"put",
             headers:{
                 "Content-Type":"application/json",
-                "authorization":"Bearer "+localStorage.getItem('jwt')
+                "Authorization":"Bearer "+localStorage.getItem('jwt')
             },
             body:JSON.stringify({
                 unfollowId:userid
@@ -75,6 +75,7 @@ const Profile = ()=>{
              
         })
     }
+    
     return (
         <>
         {userProfile ? 
@@ -96,9 +97,9 @@ const Profile = ()=>{
                     justifyContent:"space-between",
                     width: "110%"
                 }}>
-                    <h6>{userProfile.posts.length} posts</h6>
-                    <h6>{userProfile.user.followers.length} followers</h6>
-                    <h6>{userProfile.user.following.length} following</h6>
+                    <h5>{userProfile.posts.length}</h5>
+                    <h5>{userProfile.user.followers.length} Followers</h5>
+                    <h5>{userProfile.user.following.length} Following</h5>
                 </div>
                 {showfollow?
                    <button style={{

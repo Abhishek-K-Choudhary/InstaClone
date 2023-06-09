@@ -25,6 +25,6 @@ npm start
 - Start the backend by runnig the command
 nodemon app 
 
-- avigate to http://localhost:3000 
+- Navigate to http://localhost:3000 
 Woohoo, you are good to go!
 
