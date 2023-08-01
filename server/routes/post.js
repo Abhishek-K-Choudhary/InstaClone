@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
 const Post = mongoose.model("Post")
-const requireLogin = require('../middleware/reqireLogin')
+const requireLogin = require('../middleware/requireLogin')
  
 
 router.get('/allpost', requireLogin, (req, res)=>{
@@ -105,7 +105,7 @@ router.put('/comment',requireLogin,(req, res)=>{
     })
 })
 
-router.delete('/deletepost/:postId',(req, res)=>{
+router.delete('/deletepost/:postId', requireLogin,(req, res)=>{
     Post.findOne({_id:req.params.postId})
     .populate("postedBy","_id")
     .exec((err, post)=>{

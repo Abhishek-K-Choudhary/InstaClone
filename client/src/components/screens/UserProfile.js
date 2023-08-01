@@ -5,8 +5,9 @@ import { useParams } from 'react-router-dom';
 const Profile = ()=>{
     const [userProfile, setProfile] = useState(null)
     const {state, dispatch} = useContext(UserContext)
-    const {userid} = useParams
+    const {userid} = useParams()
     const [showfollow,setShowFollow] = useState(state?!state.following.includes(userid):true)
+    // console.log(userid)
     useEffect(()=>{
         fetch(`/user/${userid}`,{
             headers:{
@@ -23,7 +24,7 @@ const Profile = ()=>{
             method:"put",
             headers:{
                 "Content-Type":"application/json",
-                "Authorization":"Bearer "+localStorage.getItem('jwt')
+                "authorization":"Bearer "+localStorage.getItem('jwt')
             },
             body:JSON.stringify({
                 followId:userid
@@ -50,7 +51,7 @@ const Profile = ()=>{
             method:"put",
             headers:{
                 "Content-Type":"application/json",
-                "Authorization":"Bearer "+localStorage.getItem('jwt')
+                "authorization":"Bearer "+localStorage.getItem('jwt')
             },
             body:JSON.stringify({
                 unfollowId:userid
@@ -88,7 +89,7 @@ const Profile = ()=>{
         }}>
             <div>
             <img style={{width:"160px", height:"160px", borderRadius:"80px"}} 
-            src= {userProfile.user.pic} />
+            src= {userProfile.user.pic} alt=''/>
             </div>
             <div>
                 <h4>{userProfile.user.name}</h4>
@@ -97,7 +98,7 @@ const Profile = ()=>{
                     justifyContent:"space-between",
                     width: "110%"
                 }}>
-                    <h5>{userProfile.posts.length}</h5>
+                    <h5>{userProfile.posts.length} Posts</h5>
                     <h5>{userProfile.user.followers.length} Followers</h5>
                     <h5>{userProfile.user.following.length} Following</h5>
                 </div>

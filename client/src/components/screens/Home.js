@@ -13,6 +13,7 @@ const Home = ()=>{
             }
         }).then(res=>res.json())
         .then(result=>{
+            console.log(result)
             setData(result.posts)
         })
     },[])
@@ -30,7 +31,7 @@ const Home = ()=>{
         }).then(res=>res.json())
         .then(result=>{
             const newData = data.map(item=>{
-                if(item._id==result._id){
+                if(item._id===result._id){
                     return result
                 }else{
                     return item
@@ -55,7 +56,7 @@ const Home = ()=>{
         }).then(res=>res.json())
         .then(result=>{
             const newData = data.map(item=>{
-                if(item._id==result._id){
+                if(item._id === result._id){
                     return result
                 }else{
                     return item
@@ -80,7 +81,7 @@ const Home = ()=>{
         }).then(res=>res.json())
         .then(result=>{
             const newData = data.map(item=>{
-                if(item._id==result._id){
+                if(item._id===result._id){
                     return result
                 }else{
                     return item
@@ -114,19 +115,19 @@ const Home = ()=>{
                     data.map(item=>{
                         return(
                             <div className='card home-card' key={item._id}>
-                                <h5 style={{padding:"5px"}}><Link to={item.postedBy._id !== state._id?"/profile/"+item.postedBy._id:"/profile/"}>{item.postedBy.name}</Link> {item.postedBy._id == state._id
-                                && <i className="material-icons" style={{
-                                    float:"right"
-                                }}
-                                onClick={()=>deletePost(item._id)}
-                                >delete</i>
+                                <h5 style={{padding:"5px"}}><Link to={item.postedBy._id !== state._id? "/profile/"+item.postedBy._id:"/profile"}>
+                                    {item.postedBy.name}</Link>
+                                    {item.postedBy._id === state._id && <i className="material-icons" style={{float:"right"}}
+                                    onClick={()=>deletePost(item._id)}
+                                    >delete</i>
                                 }</h5>
                                 <div className='card-image'>
-                                    <img src= {item.photo} />
+                                    <img src= {item.photo} alt=''/>
                                 </div>
                                 <div className='card-content'>
                                     <i className="material-icons">favorite_border</i>
-                                    {item.likes?item.likes.includes(state._id):null
+                                    {
+                                    item.likes.includes(state._id)
                                     ?
                                     <i className="material-icons"
                                     onClick={()=>{unlikePost(item._id)}}

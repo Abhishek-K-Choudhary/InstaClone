@@ -16,7 +16,7 @@ const CreatePost = () =>{
             method:"post",
             headers:{
                 "Content-Type":"application/json",
-                "Authorization":"Bearer "+localStorage.getItem("jwt")
+                "authorization":"Bearer "+localStorage.getItem("jwt")
             },
             body:JSON.stringify({
                 title,
@@ -44,9 +44,9 @@ const CreatePost = () =>{
     const postDetails = () =>{
         const data = new FormData()
         data.append("file", image)
-        data.append("upload_preset", "insta-clone")
-        data.append("cloud_name", "di4eqhwzy")
-        fetch("https://api.cloudinary.com/v1_1/di4eqhwzy/image/upload",{
+        data.append("upload_preset", "Upload_preset_name")
+        data.append("cloud_name", "Product_Environment_Name_Of_Cloud")
+        fetch("source for default pic",{
             method:"post",
             body:data
         })

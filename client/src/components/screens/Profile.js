@@ -5,8 +5,7 @@ const Profile = ()=>{
     const [mypics, setPics] = useState([])
     const {state, dispatch} = useContext(UserContext)
     const [image, setImage] = useState("")
-    const [url,setUrl] = useState("")
-    console.log(state)
+    
     useEffect(()=>{
         fetch('/mypost',{
             headers:{
@@ -14,6 +13,7 @@ const Profile = ()=>{
             }
         }).then(res=>res.json())
         .then(result=>{
+            console.log(result)
             setPics(result.mypost)
         })
     },[])
@@ -22,18 +22,29 @@ const Profile = ()=>{
         if(image){
             const data = new FormData()
         data.append("file", image)
-        data.append("upload_preset", "insta-clone")
-        data.append("cloud_name", "di4eqhwzy")
-        fetch("https://api.cloudinary.com/v1_1/di4eqhwzy/image/upload",{
+        data.append("upload_preset", "Upload_preset_name")
+        data.append("cloud_name", "Product_Environment_Name_Of_Cloud")
+        fetch("source for default pic",{
             method:"post",
             body:data
         })
         .then(res=>res.json())
         .then(data=>{
-            setUrl(data.url)
-            console.log(data)
-            localStorage.setItem("user", JSON.stringify({...state, pic: data.url}))
-            dispatch({type:"UPDATEPIC", payload:data.url})
+            fetch('/updatepic',{
+            method:"put",
+            headers:{
+                "Content-Type":"application/json",
+                "authorization":"Bearer "+localStorage.getItem("jwt")
+            },
+
+            body:JSON.stringify({
+                pic:data.url
+            })
+            }).then(res=>res.json())
+            .then(result=>{
+                localStorage.setItem("user", JSON.stringify({...state, pic: result.pic}))
+                dispatch({type:"UPDATEPIC", payload:result.pic})
+            })
         }).catch(err=>{
             console.log(err)
         })
@@ -61,7 +72,7 @@ const Profile = ()=>{
 
                 <div>
                 <img style={{width:"160px", height:"160px", borderRadius:"80px"}} 
-                src= {state?state.pic:"loading"} />
+                src= {state?state.pic:"loading"} alt=''/>
                 </div>
 
                 <div>
