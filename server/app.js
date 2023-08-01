@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const mongoose  = require('mongoose')
-const {MONGOURI} = require('./config/keys')
+const {MONGOURI} = require('./keys')
 const PORT = 5000
 
 
@@ -21,7 +21,7 @@ require('./models/post')
 app.use(express.json())
 app.use(require('./routes/auth'))
 app.use(require('./routes/post'))
-
+app.use(require('./routes/user'))
 
 
 app.listen(PORT, ()=>{
